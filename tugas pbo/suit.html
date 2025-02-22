@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suit Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        .game-container {
+            text-align: center;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .board {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .player {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .score {
+            display: flex;
+            gap: 10px;
+        }
+        .circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #ddd;
+        }
+        .active {
+            background-color: #4caf50;
+        }
+        .play-button {
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .play-button:hover {
+            background-color: #0056b3;
+        }
+        .icon {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="board">
+            <div class="player" id="playerA">
+                <img src="" alt="Player A Icon" class="icon" id="iconA">
+                <div class="score" id="scoreA">
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                </div>
+            </div>
+
+            <button class="play-button" id="playButton">Play</button>
+
+            <div class="player" id="playerB">
+                <img src="" alt="Player B Icon" class="icon" id="iconB">
+                <div class="score" id="scoreB">
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class Player {
+            constructor(name, scoreElement, iconElement) {
+                this.name = name;
+                this.score = 0;
+                this.scoreElement = scoreElement;
+                this.iconElement = iconElement;
+                this.icons = ["scissors.png", "rock.png", "paper.png"];
+            }
+
+            get currentScore() {
+                return this.score;
+            }
+
+            set currentScore(value) {
+                this.score = value;
+                this.updateScoreDisplay();
+            }
+
+            randomizeIcon() {
+                const randomIndex = Math.floor(Math.random() * this.icons.length);
+                const icon = this.icons[randomIndex];
+                this.iconElement.src = icon;
+                return randomIndex;
+            }
+
+            updateScoreDisplay() {
+                for (let i = 0; i < 3; i++) {
+                    this.scoreElement.children[i].classList.toggle("active", i < this.score);
+                }
+            }
+        }
+
+        const playerA = new Player("A", document.getElementById("scoreA"), document.getElementById("iconA"));
+        const playerB = new Player("B", document.getElementById("scoreB"), document.getElementById("iconB"));
+
+        const playButton = document.getElementById("playButton");
+
+        function determineWinner(choiceA, choiceB) {
+            if (choiceA === choiceB) return "draw";
+            if ((choiceA === 0 && choiceB === 2) || (choiceA === 1 && choiceB === 0) || (choiceA === 2 && choiceB === 1)) {
+                return "A";
+            }
+            return "B";
+        }
+
+        playButton.addEventListener("click", () => {
+            const choiceA = playerA.randomizeIcon();
+            const choiceB = playerB.randomizeIcon();
+
+            const winner = determineWinner(choiceA, choiceB);
+
+            if (winner === "A") {
+                playerA.currentScore++;
+            } else if (winner === "B") {
+                playerB.currentScore++;
+            }
+
+            if (playerA.currentScore === 3 || playerB.currentScore === 3) {
+                alert(`${winner === "A" ? "Player A" : "Player B"} wins the game!`);
+                playerA.currentScore = 0;
+                playerB.currentScore = 0;
+            }
+        });
+    </script>
+</body>
+</html>
