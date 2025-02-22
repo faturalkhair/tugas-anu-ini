@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="imageCanvas"></canvas>
+    <script>
+// materi terakhir
+//INTEGRASIKAN GAMBAR DAN VIDEO
+        const canvas = document.getElementById("imageCanvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // const image = new Image();
+        // image.src = "pattern6.png";
+        // image.onload = () => {
+        //     ctx.drawImage (image, 80,80,500,400);
+        // };
+        
+        // image.onload = () => {
+        //     ctx.filter = "invert(70%)";
+        //     ctx.drawImage(image, 80, 80, 500,400);
+        // }
+        // // filter
+        // // brighness (150%)
+        // // contras (200%)
+        // // sepia (100%)
+        // // invert (100%)
+        // // saturate (300%)
+        // // hve - rotate (90deg)
+
+
+
+
+
+        // function updateVideoCanvas() {
+        //     ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+        //     requestAnimationFrame(updateVideoCanvas);
+        // }
+
+        // const video = document.createElement("video");
+        // video.src = "videoPendek.mp4";
+        // video.autoplay = true;
+        // video.loop = true;
+        // video.muted = true;
+        // video.play();
+
+        // video.addEventListener("play", () => {
+        //     updateVideoCanvas();
+        // });
+
+        //     function updateVideoCanvas() {
+        //     ctx.filter("blur(5px)") atau grayscale(100%)
+        //     ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+        //     requestAnimationFrame(updateVideoCanvas);
+        // }
+
+
+
+
+
+
+
+
+        // ctx.fillStyle = "#0af5f1";
+        // ctx.fillRect (50,50,200,200);
+
+        // ctx.globalCompositeOperation = "multiply";
+
+        // ctx.fillStyle = "#f5770a";
+        // ctx.fillRect (150,150,200,200);
+
+
+
+
+
+        //baru
+        ctx.fillStyle = "gray";
+        ctx.fillRect (0,0, canvas.width, canvas.height);
+        ctx.fillStyle = "black";
+        ctx.fillRect(50,50, 250, 200);
+
+        ctx.beginPath();
+        ctx.arc(150, 150, 100, 0, Math.PI * 2);
+        ctx.clip();
+
+        ctx.fillStyle = "pink";
+        ctx.fillRect(50,50, 200, 200);
+
+ 
+        ctx.fillStyle = "white";
+        ctx.font = "28px Arial"
+        ctx.fillText("blackPink", 100, 150);
+
+            //UAS
+            //22/2/25
+            // UAS_NIM_NAMA_KELAS
+            // bit.ly/Gk-Canvas
+
+        
+
+        
+    </script>
+    
+</body>
+</html>

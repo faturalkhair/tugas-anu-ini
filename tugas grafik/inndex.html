@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Radial Gradient</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="radialCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById("radialCanvas");
+        const ctx = canvas.getContext("2d");
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const gradient = ctx.createRadialGradient(
+            canvas.width / 2, canvas.height / 2, 100,
+            canvas.width / 2, canvas.height / 2, canvas.height / 2
+        );
+        
+        gradient.addColorStop(0.1, "red");
+        gradient.addColorStop(0.1, "yellow");
+        gradient.addColorStop(0, "orange");
+        gradient.addColorStop(1, "#000");
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    </script>
+</body>
+</html>
+
+
+<!-- 
+    // Menggambar pake coding
+// buat pola menggunakan gambar pilihan adna dengan perulangan berbeda (repeat-x repeat-y)
+//gabungkan gradient linear dan radial untuk membuat desain latar yang menarik
+gunakan pola dan gradien untuk menggambar bentuk kompleks, seperti bendera atau logo
+ -->

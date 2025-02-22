@@ -1,0 +1,154 @@
+<!-- 
+    PATH API
+
+    garis, kurva & bentuk lain yg digambar scr berurutan di canvas
+
+//Konsep Dasar Path
+    beginPath
+    moveTo(x)
+    lineTo(x,y)
+    arc
+    quadraticCurveTo
+    bezierCurveTo
+    closePath
+
+Konsep Dasar
+    quadricCurveTo (cp1x, cp1y, x,y)
+    bazierCurveTo (cp1x, cp1y, cp2x, cp2y, x,y)
+ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+    <canvas id="octagonCanvas"></canvas>
+    <script>
+        // const canvas = document.getElementById("simplePath");
+        // const ctx = canvas.getContext("2d");
+
+        // canvas.width = window.innerWidth;
+        // canvas.height = window.innerHeight;
+
+
+
+        // ctx.beginPath(); // mulai
+        // ctx.moveTo(200, 50); //titid awal
+        // ctx.lineTo(250, 150);
+        // ctx.lineTo(350, 150);
+        // ctx.lineTo(275, 200);
+        // ctx.lineTo(300, 300);
+        // ctx.lineTo(200, 250);
+        // ctx.lineTo(100, 300);
+        // ctx.lineTo(125, 200);
+        // ctx.lineTo(50, 150);
+        // ctx.lineTo(150, 150);
+        // ctx.closePath();
+        // ctx.fillStyle = "#ffffff";
+        // ctx.fill();
+        // ctx.stroke() // garis tepi
+
+
+
+
+        // function drawHeart(x, y, width, height) {
+        //     ctx.beginPath();
+        //     ctx.moveTo(x, y + height / 4);
+            
+        //     // Left half of the heart
+        //     ctx.bezierCurveTo(
+        //         x, y, 
+        //         x - width / 2, y, 
+        //         x - width / 2, y + height / 4
+        //     );
+
+        //     // Bottom of the heart
+        //     ctx.bezierCurveTo(
+        //         x - width / 2, y + height / 2, 
+        //         x, y + height / 1.5, 
+        //         x, y + height
+        //     );
+
+        //     // Right half of the heart
+        //     ctx.bezierCurveTo(
+        //         x, y + height / 1.5, 
+        //         x + width / 2, y + height / 2, 
+        //         x + width / 2, y + height / 4
+        //     );
+
+        //     ctx.bezierCurveTo(
+        //         x + width / 2, y, 
+        //         x, y, 
+        //         x, y + height / 4
+        //     );
+
+        //     ctx.closePath();
+        //     ctx.fillStyle = "red";
+        //     ctx.fill();
+        //     ctx.strokeStyle = "black";
+        //     ctx.stroke();
+        // }
+
+        // drawHeart(canvas.width / 2, canvas.height / 3, 300, 250);
+    
+
+
+        // awan
+        // ctx.beginPath();
+        // ctx.moveTo(150,200);
+        // ctx.quadraticCurveTo(130, 160, 170, 160);
+        // ctx.quadraticCurveTo(200, 120, 230, 160);
+        // ctx.quadraticCurveTo(270, 160, 250, 200);
+        // ctx.quadraticCurveTo(300, 220, 250, 240);
+        // ctx.quadraticCurveTo(220, 280, 170, 240);
+        // ctx.quadraticCurveTo(130, 220, 150, 200);
+        // ctx.closePath();
+        // ctx.fillStyle = "#11111111";
+        // ctx.fill();
+        // ctx.stroke();
+
+        // tugas
+        // gambar sebuah lingkaran sebagai dasar logo
+        // tambahelemen dekoratif mengunakan kurva dan garis
+        //
+        const canvas = document.getElementById("octagonCanvas");
+        const ctx = canvas.getContext("2d");
+
+         canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+         const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const size = 100; 
+
+         const sides = 8;  
+        const angleStep = (Math.PI * 2) / sides;
+
+         ctx.beginPath();
+        for (let i = 0; i < sides; i++) {
+            const x = centerX + size * Math.cos(i * angleStep);
+            const y = centerY + size * Math.sin(i * angleStep);
+
+            if (i === 0) {
+                ctx.moveTo(x, y); 
+            } else {
+                ctx.lineTo(x, y); // Hubungkan titik berikutnya
+            }
+        }
+        ctx.closePath();
+
+        // Styling segi delapan
+        ctx.fillStyle = "#87CEEB"; // Warna isi
+        ctx.fill();
+        ctx.strokeStyle = "#000"; // Warna garis tepi
+        ctx.stroke();
+
+
+        
+    </script>
+ </body>
+ </html>

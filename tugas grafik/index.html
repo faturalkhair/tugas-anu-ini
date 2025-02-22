@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="patternCanvas"></canvas> 
+     <!-- width="100%" height="100%"
+    <script>
+        const canvas = document.getElementById("patternCanvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.hight = window.innerHignt;
+
+        const img = new Image();
+        //gambar kecil u/ pola
+        img.src = "pattern6.png"
+        img.onload = () => {
+            const pattern = ctx.createPattern(img, "repeat");
+            ctx.fillStyle = pattern;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }; -->
+    <script> 
+
+        const canvas = document.getElementById("patternCanvas");
+        const ctx = canvas.getContext("2d"); 
+
+
+        canvas.width = window.innerWidth;
+        canvas.hight = window.innerHignt;
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, "red");
+        gradient.addColorStop(0.5, "yellow");
+        gradient.addColorStop(1, "green");
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 400, 200);
+
+        
+    </script>
+</body>
+</html>
+
+<!-- 
+            const canvas = document.getElementById("patternCanvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.hight = window.innerHignt;
+
+        const img = new Image();
+        //gambar kecil u/ pola
+        img.src = "pattern6.png"
+        img.onload = () => {
+            const pattern = ctx.createPattern(img, "repeat");
+            ctx.fillStyle = pattern;
+            // ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillRect (50, 50, 200, 200);
+            ctx.fillRect (300, 300, 200, 200);
+
+            ctx.beginPath();
+            ctx.arc(500, 150, 75, 0, Math.Pi * 2);
+            ctx.fillStyle =Pattern;
+            ctx.fill();
+            ctx.closePath();
+ -->

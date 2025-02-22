@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>p</title>
+</head>
+<body>
+    <p>
+        slank
+    </p>
+
+    <!-- 
+        ai deep seek
+     -->
+    
+
+    <!-- 
+
+        sker hear
+        // kasi miring gambar
+        (skew) hear
+
+        matriks 2*3
+        [ a c e]
+        [ b d f]
+
+        koordinat cartesius
+        sumbu x & sumbu y
+
+        sumbu 
+
+
+     -->
+
+
+     <canvas id="bolaPantul"></canvas>
+    <script>
+        // const canvas = document.getElementById("shearH");
+        // const ctx = canvas.getContext("2d");
+
+        // canvas.width = window.innerWidth;
+        // canvas.height = window.innerHeight;
+
+        // // persegi
+        // ctx.fillStyle = "green";
+        // ctx.fillRect(50, 50, 100,100);
+
+        // // sher horixontal
+        // ctx.transform(1, 0.5, 0,1,0,0);
+        // ctx.fillStyle = "orange";
+        // ctx.fillRect(50, 50, 100, 100);
+
+
+        // pesawat, roket
+
+        //DASAR ANIMASI FISIKA
+        // kecepatan percepatan === 
+        // 1. kecepatan menentukan seberapa cepat posisi suatu objek berubah dalam satuan waktu
+        // 2. percepatan menentkan peruahan kecepatan objek seperti efek gravitasi
+        //gravitasi ==== memantul === percepatan konstan
+        // 
+
+//         const canvas = document.getElementById("bolaPantul");
+// const ctx = canvas.getContext("2d");
+
+// canvas.width = window.innerWidth;
+// canvas.height = window.innerHeight;
+
+// let ball = {
+//     x: 100,
+//     y: 50,
+//     radius: 44, // ukuran bola
+//     vx: 2,
+//     vy: 2,
+//     gravity: 0.5,
+//     damping: 0.8, // redaman pantulan
+// };
+
+// function update() {
+//     // Membersihkan canvas
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+//     // Memperbarui posisi bola
+//     ball.x += ball.vx;
+//     ball.y += ball.vy;
+
+//     // Menambahkan efek gravitasi
+//     ball.vy += ball.gravity;
+
+//     // Pantulan pada dinding horizontal
+//     if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
+//         ball.vx = -ball.vx; // Membalikkan kecepatan horizontal
+//     }
+
+//     // Pantulan pada dinding bawah
+//     if (ball.y + ball.radius > canvas.height) {
+//         ball.vy = -ball.vy * ball.damping; // Mengurangi kecepatan akibat redaman
+//         ball.y = canvas.height - ball.radius; // Mencegah bola menembus lantai
+//     }
+
+//     // Menggambar bola
+//     ctx.beginPath();
+//     ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+//     ctx.fillStyle = "black";
+//     ctx.fill();
+//     ctx.closePath();
+
+//     // Meminta frame berikutnya
+//     requestAnimationFrame(update);
+// }
+
+// // Menjalankan animasi
+// update();
+
+
+
+// baru
+const canvas = document.getElementById("bolaPantul");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+// Membuat 50 partikel dengan posisi dan kecepatan acak
+for (let i = 0; i < 50; i++) {
+    particles.push({
+        x: Math.random() * canvas.width, // Perbaikan Math.Random ke Math.random
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 4, // Kecepatan horizontal (-2 hingga 2)
+        vy: (Math.random() - 0.5) * 4, // Kecepatan vertikal (-2 hingga 2)
+        radius: 10, // Ukuran partikel
+    });
+}
+
+function updateParticles() {
+    // Membersihkan canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach((particle) => {
+        // Memperbarui posisi partikel
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+
+        // Menambahkan gravitasi
+        particle.vy += 0.1;
+
+        // Pantulan pada lantai
+        if (particle.y + particle.radius > canvas.height) {
+            particle.vy = -particle.vy * 0.8; // Redaman pantulan
+            particle.y = canvas.height - particle.radius; // Mencegah partikel menembus lantai
+        }
+
+        // Pantulan pada dinding kiri dan kanan
+        if (particle.x - particle.radius < 0 || particle.x + particle.radius > canvas.width) {
+            particle.vx = -particle.vx; // Membalikkan kecepatan horizontal
+        }
+
+        // Menggambar partikel
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2); // Perbaikan MathPI ke Math.PI
+        ctx.fillStyle = "yellow";
+        ctx.fill();
+        ctx.closePath();
+    });
+
+    // Meminta frame berikutnya
+    requestAnimationFrame(updateParticles);
+}
+
+// Menjalankan animasi
+updateParticles();
+
+
+
+
+
+    </script>
+
+
+
+<!-- 
+    TUGASSSSSSS
+    1. KETIKA D KLIK, JATUH
+    4. DRAG DROP
+    5. GRAFITASI
+    6. 
+
+    TUGAS1_NIM_NAMA_KELASD
+    
+ -->
+</body>
+</html>
