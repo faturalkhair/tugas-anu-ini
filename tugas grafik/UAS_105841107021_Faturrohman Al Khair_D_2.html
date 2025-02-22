@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAS GK</title>
+</head>
+<body>
+    <canvas id="putarPutar"></canvas>
+    <script>
+        const canvas = document.getElementById("putarPutar");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        let arrows = 1;
+        let angle = 0;
+        let isPaused = true;  
+        
+        function drawCircle() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 80;
+
+            const gradient = ctx.createRadialGradient(centerX, centerY, 20, centerX, centerY, radius);
+            gradient.addColorStop(0, "yellow");
+            gradient.addColorStop(1, "#ff8400");
+
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+            ctx.fillStyle = gradient;
+            ctx.fill();
+        }
+        
+        function drawArrow(x, y, rotation) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(rotation);
+            ctx.beginPath();
+            ctx.moveTo(-10, 20);
+            ctx.lineTo(10, 20);
+            ctx.lineTo(5, 0);
+            ctx.lineTo(15, 0);
+            ctx.lineTo(20, 20);
+            ctx.lineTo(30, 20);
+            ctx.lineTo(15, 40);
+            ctx.closePath();
+            ctx.fillStyle = "#ff8400";
+            ctx.fill();
+            ctx.restore();
+        }
+        
+        function update() {
+            if (!isPaused) {
+                angle += 0.02;
+                if (angle >= Math.PI * 2) {
+                    angle = 0;
+                    arrows = Math.min(arrows + 1, 4);
+                }
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawCircle();
+            for (let i = 0; i < arrows; i++) {
+                let arrowAngle = angle + (i * Math.PI / 2);
+                let x = canvas.width / 2 + Math.cos(arrowAngle) * 120;
+                let y = canvas.height / 2 + Math.sin(arrowAngle) * 120;
+                drawArrow(x, y, arrowAngle);
+          }
+        }
+
+        function loop() {
+            update();
+            draw();
+            requestAnimationFrame(loop);
+        }
+        
+        canvas.addEventListener("click", (event) => {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 80;
+
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = event.clientX - rect.left;
+            const mouseY = event.clientY - rect.top;
+
+            const distance = Math.sqrt((mouseX - centerX) ** 2 + (mouseY - centerY) ** 2);
+            if (distance <= radius) {
+                isPaused = !isPaused;
+            }
+        });
+
+        loop();
+    </script>
+</body>
+</html>
+
+<!-- 
+Hasil objek dari jawaban anda bukan dari gambar (png,jpg, gif, dll) maupun video
+melainkan dibuat dengan canvas html5
+Tidak diterima jawaban titipan, gunakan akun masing-masing untuk mengupload jawaban
+=====================================================================
+Format file : NIM_NAMA_KELAS_NOMORSOAL
+Kumpul hasilnya dengan file html di link berikut : https://forms.gle/c7ecvNGA7jDX1bQy5
+Tidak dikumpul di googleDrive (tidak diterima)
+Batas pengumpulan 22.00 WITA (22/2/25)
+
+105841107021_Faturrohman Al Khair_D_2
+https://forms.gle/c7ecvNGA7jDX1bQy5
+
+ -->
