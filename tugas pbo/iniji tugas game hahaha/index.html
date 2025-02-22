@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tugas PBO ku ini? fix</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>PUS <br> YANG KALAH ISTIRAHAT TEKNIK</h1>
+        <div class="board">
+            <div class="player" id="playerA">
+                <p>MANUFAKTUR 21</p>
+                <img src="bat.png" alt="Pilihan A" class="icon" id="iconA">
+                <p id="scoreA">0</p>
+            </div>
+            <div class="controls">
+                <button id="playButton">ok</button>
+                <button id="resetButton">reset bro</button>
+            </div>
+            <div class="player" id="playerB">
+                <p>AVIATOR 22</p>
+                <img src="bat.png" alt="Pilihan B" class="icon" id="iconB">
+                <p id="scoreB">0</p>
+            </div>
+        </div>
+        <p id="winner"></p>
+    </div>
+    <script>
+
+
+ 
+class Player {
+    constructor(name) {
+        this.name = name;
+        this.score = 0;
+        this.choice = "";
+    }
+
+     setChoice(choice) {
+        this.choice = choice;
+    }
+
+     getChoice() {
+        return this.choice;
+    }
+
+     addScore() {
+        this.score++;
+    }
+
+    
+    getScore() {
+        return this.score;  
+    }
+}
+
+ class Game {
+    constructor(playerA, playerB) {
+        this.playerA = playerA;
+        this.playerB = playerB;
+        this.choices = ["gunting", "batu", "kertas"];
+        this.icons = {
+            gunting: "gun.png",
+            batu: "bat.png",
+            kertas: "ker.png"
+        };
+    }
+
+     randomChoice() {
+        const index = Math.floor(Math.random() * this.choices.length);
+        return this.choices[index];
+    }
+
+     determineWinner() {
+        const a = this.playerA.getChoice();
+        const b = this.playerB.getChoice();
+
+        if (a === b) return "sama";
+        if (
+            (a === "gunting" && b === "kertas") ||
+            (a === "batu" && b === "gunting") ||
+            (a === "kertas" && b === "batu")
+        ) {
+            this.playerA.addScore();
+            return "MANUFAKTUR MENANG";
+        } else {
+            this.playerB.addScore();
+            return "AVIATOR MENANG";
+        }
+    }
+}
+
+ const playerA = new Player("A");
+const playerB = new Player("B");
+const game = new Game(playerA, playerB);
+
+ document.getElementById("playButton").addEventListener("click", () => {
+    setTimeout(() => {  
+         playerA.setChoice(game.randomChoice());
+        playerB.setChoice(game.randomChoice());
+
+         document.getElementById("iconA").src = game.icons[playerA.getChoice()];
+        document.getElementById("iconB").src = game.icons[playerB.getChoice()];
+
+         const result = game.determineWinner();
+        document.getElementById("scoreA").textContent = playerA.getScore();
+        document.getElementById("scoreB").textContent = playerB.getScore();
+        document.getElementById("winner").textContent = result;
+
+         if (playerA.getScore() === 3 || playerB.getScore() === 3) {
+            document.getElementById("playButton").disabled = true;
+            document.getElementById("winner").textContent = `${result}! SELESAI MI KANDA`;
+        }
+    }, 1000);  
+});
+
+ document.getElementById("resetButton").addEventListener("click", () => {
+     playerA.score = 0;
+    playerB.score = 0;
+
+     document.getElementById("scoreA").textContent = 0;
+    document.getElementById("scoreB").textContent = 0;
+    document.getElementById("iconA").src = "bat.png";
+    document.getElementById("iconB").src = "bat.png";
+    document.getElementById("winner").textContent = "";
+
+     document.getElementById("playButton").disabled = false;
+});
+
+    </script>
+</body>
+</html>
+
+
