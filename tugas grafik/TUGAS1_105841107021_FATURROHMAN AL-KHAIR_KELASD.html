@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>grafikKomputer</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+         }
+    </style>
+</head>
+<body>
+    <canvas id="tugas1fatur"></canvas>
+    <script>
+        const canvas = document.getElementById("tugas1fatur");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const gravity = 0.5;
+        let isFalling = false;
+
+        const rectangles = [
+            { x: canvas.width / 2, y: 200, width: 150, height: 45, angle: 0, speedY: 0, color: "pink", rotating: true, skewX: -0.5 },
+            { x: canvas.width / 2, y: 200, width: 50, height: 150, angle: 0, speedY: 0, color: "black", rotating: true, skewY: -0.5 }
+        ]; 
+
+        function drawRect(rect) {
+            ctx.save();
+            ctx.translate(rect.x, rect.y);
+            ctx.rotate(rect.angle); 
+
+             ctx.transform(1, 0, rect.skewX, 1, 0, 0);  
+             ctx.transform(1, 0, rect.skewY, 1, 0, 0);  
+
+            ctx.fillStyle = rect.color;  
+            ctx.fillRect(-rect.width / 2, -rect.height / 2, rect.width, rect.height);
+            ctx.restore();
+        }
+
+        function update() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            rectangles.forEach(rect => {
+                if (rect.rotating) {
+                    rect.angle += 0.005;  
+                }
+
+                if (isFalling) {
+                    rect.y += rect.speedY;
+                    rect.speedY += gravity;
+                    if (rect.y + rect.height / 2 >= canvas.height) {
+                        rect.y = canvas.height - rect.height / 2;
+                        rect.speedY = 0;
+
+                         rect.angle = 0;   
+                        rect.rotating = false;  
+                    }
+                }
+
+                drawRect(rect);
+            });
+            requestAnimationFrame(update);
+        }
+
+        canvas.addEventListener("click", () => {
+            isFalling = true;
+        });
+
+        update();
+    </script>
+</body>
+</html>
